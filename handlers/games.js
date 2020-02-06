@@ -19,7 +19,13 @@ exports.createGame = async (req, res) => {
 
 exports.getAllGames = async (req, res) => {
     try {
-        let games = await db.Game.find(req.query);
+        let games = [];
+        if ("editor" in req.query) {
+            games = await db.Game.find(req.query).select({name: 1, editor: 1, releaseDate: 1});
+        } else {
+            games = await db.Game.find(req.query);
+        }
+        games.sort((a, b) => new Date(b.releaseDate) - new Date(a.releaseDate))
         return res.send(games);
     } catch (err) {
         console.log(err);
