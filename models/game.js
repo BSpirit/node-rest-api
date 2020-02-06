@@ -31,7 +31,7 @@ const gameSchema = new mongoose.Schema({
     },
     releaseDate: {
         type: Date,
-        default: Date.now(),
+        default: new Date().toJSON().split("T")[0],
     },
     isAwardWinner: {
         type: Boolean,
