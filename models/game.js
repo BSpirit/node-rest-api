@@ -26,7 +26,7 @@ const gameSchema = new mongoose.Schema({
     },
     stock: {
         type: Number,
-        default: 0,
+        required: true,
         min: 0,
     },
     releaseDate: {
